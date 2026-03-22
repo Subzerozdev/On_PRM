@@ -1,0 +1,298 @@
+--- Page 1 ---
+Simple UI Widgets
+
+--- Page 2 ---
+Contents
+•
+Views
+•
+ViewGroups
+•
+View hierarchy
+
+--- Page 3 ---
+Views
+•
+Everything you see is a view
+•
+Examples of views
+Views
+Button
+EditText
+Slider
+CheckBox
+RadioButton
+Switch
+
+--- Page 4 ---
+Android Widgets
+
+--- Page 5 ---
+Create views and layouts
+●Android Studio layout editor: visual representation of XML 
+●XML editor
+●Java code
+
+--- Page 6 ---
+Android Studio layout editor
+•
+XML layout file 
+•
+Design and Text tabs
+•
+Palette pane
+•
+Component Tree 
+•
+Design and blueprint 
+panes
+•
+Attributes tab
+
+--- Page 7 ---
+View defined in XML
+<TextView
+android:id="@+id/show_count"
+android:layout_width="match_parent"
+android:layout_height="wrap_content"
+android:background="@color/myBackgroundColor"
+android:text="@string/count_initial_value"
+android:textColor="@color/colorPrimary"
+android:textSize="@dimen/count_text_size"
+android:textStyle="bold" 
+/>
+
+--- Page 8 ---
+View attributes in XML
+android:<property_name>="<property_value>"
+Example: android:layout_width="match_parent"
+android:<property_name>="@<resource_type>/resource_id"
+Example: android:text="@string/button_label_next"
+android:<property_name>="@+id/view_id"
+Example: android:id="@+id/show_count"
+
+--- Page 9 ---
+Create View in Java code
+In an Activity:
+TextView myText = new TextView(this);
+myText.setText("Display this text!");
+
+--- Page 10 ---
+Views width
+
+--- Page 11 ---
+Density – independent pixels
+
+--- Page 12 ---
+Measure – inch and dp
+•
+inch = 2.54 cm
+•
+dp or dip: (density-independent pixel)Pixels - lenght measure  
+(similar with inch, Density-independent cm, mm)
+•
+Base on 160dpi (Dots per inch), 1dp - 1px on a screen which has 
+160dpi. 
+•
+Dpi != 1, number of pixels in 1 dp = n * size/160. 
+•
+160 dp = 1 inch –>
+1dp = 1/160 = 0.00625 inch
+100dp = 1.5785cm
+1cm = ? inch
+
+--- Page 13 ---
+Demonstrate px and dp
+(Number of) px = (number of)dp * (dpi / 160)
+Example dpi of screen is 320
+10 dp has: 10 * (320/160) = 20 px, 1 dp has 2 px.
+
+--- Page 14 ---
+Measure - sp
+•
+sp: Scale-independent Pixels – Similar with dp, but scaled to 
+suitable with size of fonts.. 
+•
+The size of font is adjust base on 3 conditions:
+– The adjust from programmer
+– screen density
+– Setting of font size on device.
+Default: 1SP = 1DP.
+
+--- Page 15 ---
+Measure - dpi
+•
+Screen density : number of pixels on 1 inch of screen, called dpi (dots 
+per inch)
+•
+Base on dpi, the screen is classify:
+– ldpi (low) ~120dpi
+– mdpi (medium) ~160dpi
+– hdpi (high) ~240dpi
+– xhdpi (extra-high) ~320dpi
+– xxhdpi (extra-extra-high) ~480dpi
+– xxxhdpi (extra-extra-extra-high) ~640dpi
+
+--- Page 16 ---
+Measurements
+•
+Density-independent Pixels (dp): for Views
+•
+Scale-independent Pixels (sp): for text
+•
+Don't use device-dependent or density-dependent units:
+– Actual Pixels (px)
+– Actual Measurement (in, mm)
+– Points - typography 1/72 inch (pt)
+
+--- Page 17 ---
+Common Widgets
+•
+Button 
+•
+TextView
+•
+EditText
+•
+ImageView
+•
+CheckBox
+•
+RadioButton
+•
+WebView
+•
+AdapterView
+- ListView
+- Spinner 
+•
+RecyclerView
+•
+…
+
+--- Page 18 ---
+ViewGroups
+●ViewGroup contains "child" views
+
+--- Page 19 ---
+ViewGroups
+●Common Layout Classes
+●ConstraintLayout: Connect views with constraints 
+●LinearLayout: Horizontal or vertical row
+●TableLayout: Rows and columns
+●FrameLayout: Shows one child of a stack of children
+
+--- Page 20 ---
+ViewGroups
+•
+Common Layout Classes
+ConstraintLayout
+GridLayout
+TableLayout
+LinearLayout
+
+--- Page 21 ---
+Hierarchy of viewgroups and views
+ViewGroup
+ViewGroup
+View
+View
+View
+View
+View
+Root view is always a ViewGroup
+
+--- Page 22 ---
+View hierarchy and screen layout
+
+--- Page 23 ---
+View hierarchy in the layout editor
+
+--- Page 24 ---
+Layout created in XML
+<LinearLayout
+android:orientation="vertical"
+android:layout_width="match_parent"
+android:layout_height="match_parent">
+<Button
+... />
+<TextView
+... />
+<Button
+... />
+</LinearLayout
+
+--- Page 25 ---
+Layout created in Java Activity code
+LinearLayout linearL = new LinearLayout(this);
+linearL.setOrientation(LinearLayout.VERTICAL);
+TextView myText = new TextView(this);
+myText.setText("Display this text!");
+linearL.addView(myText);
+setContentView(linearL);
+
+--- Page 26 ---
+Set width and height in Java code
+LinearLayout.LayoutParams layoutParams = 
+new Linear.LayoutParams(
+LayoutParams.MATCH_PARENT,  
+LayoutParams.MATCH_CONTENT);
+myView.setLayoutParams(layoutParams);
+
+--- Page 27 ---
+LinearLayout
+•
+A box model – widgets or child containers are 
+lined up in a column or row, one after the next.
+•
+Special attributes:
+– orientation: indicates whether the LinearLayout
+represents a row or a column (vertical or horizontal)
+– weight: indicates whether the LinearLayout represents 
+a row or a column
+– gravity: is used to indicate how a control will align on 
+the screen
+LinearLayout
+
+--- Page 28 ---
+LinearLayout - Special attributes
+•
+orientation
+– Name: android:orientation
+– Value: vertical, horizontal
+
+--- Page 29 ---
+LinearLayout - Special attributes
+•
+weight
+– Name: android:layout_weight
+– Value: 1, 2, 3, …
+
+--- Page 30 ---
+LinearLayout - Special attributes
+•
+gravity
+– Name: android:layout_gravity
+– Value: left, center, right, top, bottom, etc.
+
+--- Page 31 ---
+ConstraintLayout
+Self-study
+-
+https://developer.android.com/training/constraint-layout
+-
+https://developer.android.com/codelabs/constraint-layout#0
+
+--- Page 32 ---
+Classwork
+•
+Design one of Login Screens as below: 
+
+--- Page 33 ---
+References
+•
+https://pttrns.com/android-patterns
+•
+https://google-developer-training.github.io/android-developer-
+fundamentals-course-concepts-v2/
+

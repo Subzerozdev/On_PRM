@@ -1,0 +1,169 @@
+--- Page 1 ---
+Style and Theme
+
+--- Page 2 ---
+Contents
+•
+Style
+•
+Theme
+
+--- Page 3 ---
+What is a Style? 
+•
+Collection of attributes that define the visual appearance of a View
+•
+Reduce duplication
+•
+Make code more compact
+•
+Manage visual appearance of many components with one style
+
+--- Page 4 ---
+Defining Styles
+•
+The XML file resides under res/values/ directory of your project and will have 
+<resources> as the root node which is mandatory for the style file.
+•
+<style> tag is used to define a style.
+•
+Each style is uniquely identified by it’s name.
+•
+Style attributes can be set using the <item> tag.
+<resources>
+<style name="TextviewStyle">
+<item name="android:textColor">#86AD33</item>
+<item name="android:textStyle">bold</item>
+<item name="android:textSize">20sp</item>
+<item name="android:padding">10dp</item>
+</style>
+</resources>
+
+--- Page 5 ---
+Using style
+<TextView
+android:id="@+id/txtResult"
+android:layout_width="wrap_content"
+android:layout_height="wrap_content"
+android:textColor="#86AD33"
+android:textSize="20sp“
+android:padding=“10dp”
+android:textStyle="bold" />
+<TextView
+android:id="@+id/txtResult"
+android:layout_width="wrap_content"
+android:layout_height="wrap_content"
+style="@style/TextviewStyle"
+android:text="Welcome to Android"/>
+<resources>
+<style name="TextviewStyle">
+<item name="android:textColor">#86AD33</item>
+<item name="android:textStyle">bold</item>
+<item name="android:textSize">20sp</item>
+<item name="android:padding">10dp</item>
+</style>
+</resources>
+
+--- Page 6 ---
+Android Style Inheritance
+<style name="TextviewStyle" parent="@android:style/W
+idget.TextView">
+<item name="android:textColor">#86AD33</item>
+<item name="android:textStyle">bold</item>
+<item name="android:textSize">20dp</item>
+</style>
+
+--- Page 7 ---
+Android Styling Color Palette
+•
+In android, we can customize the 
+application basic theme colors based on our 
+requirements.
+•
+The example of basic material design in the 
+android application
+
+--- Page 8 ---
+Android's styling system
+•
+The diagram shown below summarizes the precedence of each 
+method of styling
+•
+Priority is top-down 
+
+--- Page 9 ---
+Android's styling system
+•
+View attributes
+– Use view attributes to set attributes explicitly for each view. (View attributes 
+are not reusable, as styles are.)
+– You can use every property that can be set via styles or themes.
+•
+Styles
+– Use a style to create a collection of reusable styling information, such as font 
+size or colors.
+– Good for declaring small sets of common designs used throughout your app.
+•
+Default style: This is the default styling provided by the Android system.
+•
+Text Appearance: For styling with text attributes only, such as font family.
+
+--- Page 10 ---
+Themes
+•
+A Theme is a style applied to an entire activity or even the entire 
+application 
+•
+Themes are applied in AndroidManifest.xml
+<application android:theme="@style/AppTheme">
+
+--- Page 11 ---
+Customize AppTheme of Your Project
+<!-- Base application theme. -->
+<style name="AppTheme" 
+parent="Theme.AppCompat.Light.DarkActionBar">
+<!-- Try: Theme.AppCompat.Light.NoActionBar -->
+<!-- Customize your theme here. -->
+<item name="colorPrimary">@color/colorPrimary</item>
+<item name="colorPrimaryDark">@color/colorPrimaryDark</item>
+<item name="colorAccent">@color/colorAccent</item>
+</style>
+
+--- Page 12 ---
+Using theme
+<resources>
+<style name="AppTheme" 
+parent="Theme.AppCompat.Light.DarkActionBar">
+<item name="colorPrimary">@color/colorPrimary</item>
+<item name="colorPrimaryDark">@color/colorPrimaryDark
+</item>
+<item name="colorAccent">@color/colorAccent</item>
+</style>
+</resources>
+
+--- Page 13 ---
+Using theme
+<resources>
+<style name="AppTheme" 
+parent="Theme.AppCompat.Light.NoActionBar">
+<item name="colorPrimary">@color/colorPrimary</item>
+<item name="colorPrimaryDark">@color/colorPrimaryDark
+</item>
+<item name="colorAccent">@color/colorAccent</item>
+</style>
+</resources>
+
+--- Page 14 ---
+Classwork
+•
+Apply style and theme to Login screens
+
+--- Page 15 ---
+References
+•
+https://google-developer-training.github.io/android-developer-
+fundamentals-course-concepts-v2/
+•
+https://www.tutlane.com/tutorial/android/android-styles-and-
+themes-with-examples
+

@@ -1,0 +1,79 @@
+--- Page 1 ---
+Android Permission
+
+--- Page 2 ---
+Android Permission
+•
+In Android 6.0 Marshmallow, application will not be granted any 
+permission at installation time. Instead,  application has to ask user 
+for a permission one-by-one at runtime.
+
+--- Page 3 ---
+Normal Permissions
+
+--- Page 4 ---
+Dangerous Permissions
+
+--- Page 5 ---
+Permission Groups
+•
+Android 6.0 Marshmallow has nine main groups of permissions:
+– Calendar: Read and/or write to the calendar.
+– Camera: Give the application the ability to access the camera.  Location: 
+Access fine or coarse location.
+– Microphone: The ability to record audio.
+– Phone: Includes phone state; the ability to make calls, read, and write to the call 
+log; and voicemail.  Sensor: The ability to use various sensors in the device, 
+like a gyroscope.
+– SMS: Similar to how the phone is handled including sending and receiving 
+texts. MMS and cell broadcasts.  Storage: Read and write to device’s external 
+storage.
+
+--- Page 6 ---
+Manually Enabling and Disabling Runtime Permissions
+•
+Open your device’s Settings app.
+– Tap apps and find an app that you want to work 
+with. Select it.
+– Tap applications permissions on the App Info 
+screen.
+– You will see the list of permissions the app 
+requests. Tap on the  switch to turn it on or off.
+
+--- Page 7 ---
+Workflow for handling android permission
+
+--- Page 8 ---
+How to Check for Runtime Permissions
+•
+Check the Target SDK Version
+•
+Check if Permission Is Granted
+
+--- Page 9 ---
+Handle "Never Ask Again"
+
+--- Page 10 ---
+Request for Permission
+
+--- Page 11 ---
+Handle the Permissions Request Response
+
+--- Page 12 ---
+Classwork
+•
+In Product Details screen, add phone number 
+of Store
+•
+Click Phone number, call the Store
+
+--- Page 13 ---
+References
+•
+https://developer.android.com/training/permissions/requesting
+•
+https://dzone.com/articles/android-runtime-permissions
+•
+https://inthecheesefactory.com/blog/things-you-need-to-know-
+about-android-m-permission-develope  r-edition/en
+

@@ -1,0 +1,209 @@
+--- Page 1 ---
+RecylerView
+
+--- Page 2 ---
+Contents
+●What is RecyclerView?
+●Implementing a RecyclerView
+
+--- Page 3 ---
+What is RecyclerView?
+●RecyclerView is a view capable of displaying 
+scrollable list of items
+●
+It only creates views (widget) if needed
+●
+It recycles views, if a row is not displayed 
+anymore, it will be recycled and only its 
+content will change.
+●
+Efficient 
+○
+Uses and reuses limited number of View
+elements
+○
+Updates changing data fast
+
+--- Page 4 ---
+View recycling
+
+--- Page 5 ---
+RecyclerView components
+
+--- Page 6 ---
+RecyclerView components
+●
+Data
+●
+RecyclerView scrolling list for list items—RecyclerView
+●
+Layout for one item of data—XML file
+●
+Layout manager handles the organization of UI components in a View—
+Recyclerview.LayoutManager
+●
+Adapter connects data to the RecyclerView—RecyclerView.Adapter
+●
+ViewHolder has view information for displaying one item—
+RecyclerView.ViewHolder
+
+--- Page 7 ---
+Layout manager
+●
+Each ViewGroup has a layout manager
+●
+Use to position View items inside a RecyclerView
+●
+Reuses View items that are no longer visible to the user 
+●
+Built-in layout managers 
+○
+LinearLayoutManager
+○
+GridLayoutManager
+○
+StaggeredGridLayoutManager
+●
+Extend RecyclerView.LayoutManager
+
+--- Page 8 ---
+Adapter
+●Helps incompatible interfaces work together
+○
+Example: Takes data from database Cursor and prepares strings to put 
+into a View
+●Intermediary between data and View
+●Manages creating, updating, adding, deleting View items as 
+underlying data changes
+●RecyclerView.Adapter
+
+--- Page 9 ---
+ViewHolder
+●Used by the adapter to prepare one View with data for one list 
+item 
+●Layout specified in an XML resource file
+●Can have clickable elements
+●Is placed by the layout manager
+●RecyclerView.ViewHolder
+
+--- Page 10 ---
+Implementing RecyclerView
+1. Add RecyclerView dependency to build.gradle if needed
+2. Add RecyclerView to layout
+3. Create XML layout for item
+4. Extend RecyclerView.Adapter
+5. Extend RecyclerView.ViewHolder
+6. In Activity onCreate(), create RecyclerView with adapter and layout 
+manager
+
+--- Page 11 ---
+1. Add dependency to app/build.gradle
+Add RecyclerView dependency to build.gradle if needed:
+dependencies {
+...
+compile 'com.android.support:recyclerview-v7:26.1.0’
+...
+}
+
+--- Page 12 ---
+2. Add RecyclerView to XML Layout
+<android.support.v7.widget.RecyclerView
+android:id="@+id/recyclerview"
+android:layout_width="match_parent"
+android:layout_height="match_parent">
+</android.support.v7.widget.RecyclerView>
+
+--- Page 13 ---
+3. Create layout for 1 list item
+<LinearLayout …>
+<TextView
+android:id="@+id/word"
+style="@style/word_title" />
+</LinearLayout>
+
+--- Page 14 ---
+4. Implement the adapter
+public class WordListAdapter
+extends RecyclerView.Adapter<WordListAdapter.WordViewHolder> {
+public WordListAdapter(Context context, 
+LinkedList<String> wordList) {
+mInflater = LayoutInflater.from(context);
+this.mWordList = wordList;
+}
+}
+
+--- Page 15 ---
+Adapter has 3 required methods
+●onCreateViewHolder()
+●inBindViewHolder()
+●getItemCount()
+
+--- Page 16 ---
+onCreateViewHolder()
+@Override
+public WordViewHolder onCreateViewHolder(
+ViewGroup parent, int viewType) {
+// Create view from layout
+View mItemView = mInflater.inflate(
+R.layout.wordlist_item, parent, false);
+return new WordViewHolder(mItemView, this);
+}
+
+--- Page 17 ---
+onBindViewHolder()
+@Override
+public void onBindViewHolder(
+WordViewHolder holder, int position) {
+// Retrieve the data for that position
+String mCurrent = mWordList.get(position);
+// Add the data to the view
+holder.wordItemView.setText(mCurrent);
+}
+
+--- Page 18 ---
+getItemCount()
+@Override
+public int getItemCount() {
+// Return the number of data items to display
+return mWordList.size();
+}
+
+--- Page 19 ---
+5. Create the view holder in adapter class
+class WordViewHolder extends RecyclerView.ViewHolder { //.. }
+If you want to handle mouse clicks:
+class WordViewHolder extends RecyclerView.ViewHolder
+implements View.OnClickListener { //.. }
+
+--- Page 20 ---
+View holder constructor
+public WordViewHolder(View itemView, WordListAdapter adapter) {
+super(itemView);
+// Get the layout
+wordItemView = itemView.findViewById(R.id.word);
+// Associate with this adapter
+this.mAdapter = adapter;
+// Add click listener, if desired
+itemView.setOnClickListener(this);
+}
+// Implement onClick() if desired
+
+--- Page 21 ---
+6. Create the RecyclerView in Activity onCreate()
+mRecyclerView = findViewById(R.id.recyclerview);
+mAdapter = new WordListAdapter(this, mWordList);
+mRecyclerView.setAdapter(mAdapter);
+mRecyclerView.setLayoutManager(new
+LinearLayoutManager(this));
+
+--- Page 22 ---
+Classwork
+●Use RecyclerView to show list of products in HomeActivity
+●Click an Item, show DetailActivity
+
+--- Page 23 ---
+References
+●Using the RecyclerView | CodePath Android Cliffnotes
+●https://google-developer-training.github.io/android-developer-
+fundamentals-course-concepts-v2/
+

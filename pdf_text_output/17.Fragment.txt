@@ -1,0 +1,144 @@
+--- Page 1 ---
+Fragment
+
+--- Page 2 ---
+Contents
+●What is Fragment
+●Create Fragment
+●Interact with Activity
+
+--- Page 3 ---
+Fragment
+●Fragment: A reusable 
+segment of Android UI 
+that can appear in an 
+activity. 
+○
+can help handle different 
+devices and screen sizes 
+○
+can reuse a common 
+fragment across multiple 
+activities 
+
+--- Page 4 ---
+Create Fragment
+
+--- Page 5 ---
+Add Fragment to Activity
+●Static way:
+<LinearLayout
+android:layout_width="match_parent"
+android:layout_height="match_parent">
+<fragment android:name="com.example.news.ArticleListFragment"
+android:layout_width="match_parent"
+android:layout_height="match_parent" />
+</LinearLayout>
+
+--- Page 6 ---
+Add Fragment to Activity
+●
+Dynamic way:
+FragmentManager fragmentManager = getFragmentManager();
+FragmentTransaction fragmentTransaction = 
+fragmentManager.beginTransaction();
+ExampleFragment fragment = new ExampleFragment();
+fragmentTransaction.add(R.id.fragment_container, fragment);
+transaction.addToBackStack(null);
+fragmentTransaction.commit();
+
+--- Page 7 ---
+Communicate with Activity
+●From Activity to Fragment: 
+○
+keep fragment instance in Activity and call fragment methods directly
+●From Fragment to Activity
+○
+Pass a callback when the Fragment is created
+public class HeadlinesFragment extends Fragment { 
+OnHeadlineListener callback; 
+public void setOnHeadlineListener(OnHeadlineListener callback)          
+{         
+this.callback = callback;
+} 
+public interface OnHeadlineListener { 
+public void onArticleSelected(int position); 
+} 
+} 
+public static class MainActivity extends Activity 
+implements OnHeadlineListener { 
+@Override 
+public void onAttachFragment(Fragment fragment) { 
+if (fragment instanceof HeadlinesFragment) {       
+HeadlinesFragment headlinesFragment = 
+(HeadlinesFragment) fragment;   
+headlinesFragment.setOnHeadlineListener(this); 
+} 
+} 
+}
+
+--- Page 8 ---
+Fragment lifecycle
+●Fragments have a similar life cycle and events as 
+activities. 
+●Important methods: 
+○
+onAttach to glue fragment to its surrounding activity 
+○
+onCreate when fragment is loading 
+○
+onCreateView method that must return fragment's root UI view 
+○
+onActivityCreated method that indicates the enclosing activity is 
+ready 
+○
+onPause when fragment is being left/exited 
+○
+onDetach just as fragment is being deleted 
+
+--- Page 9 ---
+Fragment lifecycle
+●Fragment in an Activity---Activity Lifecyle influences
+○
+Activity paused -> all its fragments paused
+○
+Activity destroyed -> all its fragments destroyed
+○
+Activity running -> manipulate each fragment independently.
+●Fragment transaction: add, remove, etc.
+○
+adds it to a back stack that's managed by the activity—each back stack 
+entry in the activity is a record of the fragment transaction that occurred. 
+○
+The back stack allows the user to reverse a fragment transaction 
+(navigate backwards), by pressing the Back button 
+
+--- Page 10 ---
+Fragment lifecycle
+
+--- Page 11 ---
+Fragment subclasses 
+●DialogFragment - a fragment meant to be 
+shown as a dialog box that pops up on top of 
+the current activity.
+●ListFragment - a fragment that shows a list 
+of items as its main content.
+●PreferenceFragment - a fragment whose 
+main content is meant to allow the user to 
+change settings for the app
+
+--- Page 12 ---
+Classwork
+●Using Fragment to make:
+○
+A ListProduct Fragment
+○
+A DetailedProduct Fragment
+●Click an Item in ListProject Fragment, show DetailedProduct
+Fragment
+
+--- Page 13 ---
+References
+●https://google-developer-training.github.io/android-developer-
+fundamentals-course-concepts-v2/
+

@@ -1,0 +1,211 @@
+--- Page 1 ---
+Intent 
+& Connecting Activities
+
+--- Page 2 ---
+Contents
+●Intent
+●Starting a new Activity with an Intent
+●Passing data between activities with extras
+●Navigating between activities
+
+--- Page 3 ---
+Intent
+●An Intent is a description of an operation to be performed. 
+●An Intent is an object used to request an action from another app 
+component via the Android system.  
+App component
+Originator
+Intent
+Action
+Android 
+System
+
+--- Page 4 ---
+What can intents do?
+●Start an Activity
+○A button click starts a new Activity for text entry
+○Clicking Share opens an app that allows you to post a photo
+●Start a Service
+○Initiate downloading a file in the background
+●Deliver Broadcast
+○The system informs everybody that the phone is now charging
+
+--- Page 5 ---
+INTENT
+•
+Explicit Intent: Starts a specific Activity
+•
+Implicit Intent: Asks system to find an Activity that can handle this 
+request
+
+--- Page 6 ---
+INTENT
+•
+Explicit Intent
+Intent i = new Intent(FirstActivity.this, SecondActivity.class);
+startActivity(i);
+•
+Implicit Intent
+Intent read1=new Intent();
+read1.setAction(android.content.Intent.ACTION_VIEW);
+read1.setData(ContactsContract.Contacts.CONTENT_URI);
+startActivity(read1);
+
+--- Page 7 ---
+Implicit Intents - Examples
+7
+•
+Show a web page
+Uri uri = Uri.parse("http://www.google.com"); 
+Intent it = new Intent(Intent.ACTION_VIEW,uri); 
+startActivity(it);
+•
+Dial a phone number
+Uri uri = Uri.parse("tel:8005551234"); 
+Intent it = new Intent(Intent.ACTION_DIAL, uri); 
+startActivity(it);
+
+--- Page 8 ---
+Activity Implement
+●Start another Activity
+-
+LoginActivity.this: Current activity
+ProfileActivity.class: The activity need to launch
+
+--- Page 9 ---
+Sending and retrieving data
+●
+In the first (sending) Activity:
+•
+Create the Intent object
+•
+Put data or extras into that Intent
+•
+Start the new Activity with startActivity()
+●
+In the second (receiving) Activity: 
+•
+Get the Intent object, the Activity was started with
+•
+Retrieve the data or extras from the Intent object
+9
+
+--- Page 10 ---
+Communicating Between Activities
+-
+Pass data from Activity A to Activity B.
+-
+Get data from Activity A at Activity B.
+
+--- Page 11 ---
+Communicating Between Activities
+-
+Pass data from Activity A to Activity B and Receive a result back, 
+using:
+-
+Activity A starts activity B
+-
+Activity B sends result
+-
+Activity A receives the result back
+
+--- Page 12 ---
+Communicating Between Activities
+-
+Pass data from Activity A to Activity B and Receive a result back 
+(cont'd)
+-
+Activity A receives the result back
+
+--- Page 13 ---
+Communicating Between Activities startAcvityForResult
+is deprecated 
+private ActivityResultLauncher<Intent> activityResultLauncher;
+@Override
+protected void onCreate(Bundle savedInstanceState) {
+super.onCreate(savedInstanceState);
+setContentView(R.layout.activity_main);
+// Register the activity result launcher
+activityResultLauncher = registerForActivityResult(new ActivityResultContracts.StartActivityForResult(),
+new ActivityResultCallback<ActivityResult>() {
+@Override
+public void onActivityResult(ActivityResult result) {
+if (result.getResultCode() == Activity.RESULT_OK) {
+Intent data = result.getData();
+// Handle the returned data
+}
+}
+}
+);
+
+--- Page 14 ---
+// Example: Launch another activity
+findViewById(R.id.btn_go).setOnClickListener(new View.OnClickListener() {
+@Override
+public void onClick(View v) {
+Intent intent = new Intent(MainActivity2.this, MainActivity.class);
+activityResultLauncher.launch(intent);
+}
+});
+Communicating Between Activities startAcvityForResult
+is deprecated 
+
+--- Page 15 ---
+Activity stack
+•
+When a new Activity is started, the previous Activity is stopped and 
+pushed on the Activity back stack
+•
+Last-in-first-out-stack—when the current Activity ends, or the  user 
+presses the Back button, it is popped from the stack and the previous 
+Activity resumes
+15
+
+--- Page 16 ---
+Activity Stack
+16
+MainActivity
+What do you want to do?
+FoodListActivity
+Choose food items
+CartActivity
+View shopping cart
+MainActivity
+What do you want to do?
+FoodListActivity
+Choose food items
+MainActivity
+What do you want to do?
+FoodListActivity
+Choose food items
+CartActivity
+View shopping cart
+OrderActivity
+Place order
+MainActivity
+What do you want to do?
+After viewing 
+shopping cart, 
+user decides to 
+add more items, 
+then places order.
+
+--- Page 17 ---
+Classwork
+•
+Create LoginActivity:
+– Enter name and touch Login Button to close Login Activity & open 
+HomeActivity
+– Send name to HomeActivity
+– Clear field name if minimize and re-open app
+•
+Create HomeActivity:
+– Get name from LoginActivity and show it on screen
+– Press CLOSE button to finish app
+
+--- Page 18 ---
+References
+●https://google-developer-training.github.io/android-developer-
+fundamentals-course-concepts-v2/
+

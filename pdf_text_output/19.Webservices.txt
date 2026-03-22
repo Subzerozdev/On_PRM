@@ -1,0 +1,110 @@
+--- Page 1 ---
+Web services - Retrofit
+
+--- Page 2 ---
+Contents
+●Web services
+●Retrofit
+
+--- Page 3 ---
+Android web services
+
+--- Page 4 ---
+Retrofit
+•
+A type-safe REST client for Android developed by Square
+•
+Easy to retrieve and upload JSON (or other structured data) via a REST 
+based webservice
+•
+Set up
+dependencies {
+implementation 'com.squareup.retrofit2:retrofit:2.0.2'
+implementation 'com.squareup.retrofit2:converter-gson:2.0.2‘
+}
+
+--- Page 5 ---
+
+POST creates a resource on the server .
+
+GET retrieves an appropriate resource .
+
+PUT should be used to update the resource or change the state .
+
+DELETE is used only to remove the resource .
+HTTP Methods
+
+--- Page 6 ---
+
+@Body: sends Java objects as request body.
+
+@Path: variable substitution for the API endpoint
+
+@Url: use dynamic URLs.
+
+@Query: To URL encode a query use the form
+
+@Field: send data as form-urlencoded. The @Field parameter works only with a POST
+Method Annotations 
+
+--- Page 7 ---
+
+Model class which is used as a JSON model
+
+Interfaces that define the possible HTTP operations
+
+Retrofit.Builder class - Instance which uses the interface and the Builder API to allow defining the URL 
+end point for the HTTP operations.
+Retrofit Implementation steps
+
+--- Page 8 ---
+public interface MyApiEndpointInterface {
+@GET("users/{username}")
+Call<User> getUser(@Path("username") String username);
+@GET("group/{id}/users")
+Call<List<User>> groupList(@Path("id") int groupId, @Query("sort") String sort);
+@POST("users/new")
+Call<User> createUser(@Body User user);
+}
+Retrofit Implementation
+- Creating the API Interface
+
+--- Page 9 ---
+Retrofit Implementation
+-
+Create Java Classes for Resources
+Using jsonschema2pojo
+-
+Creating the Retrofit instance
+public static final String BASE_URL = "http://api.myservice.com/";
+Retrofit retrofit = new Retrofit.Builder() .baseUrl(BASE_URL)
+.addConverterFactory(GsonConverterFactory.create()) .build();
+MyApiEndpointInterface myRetrofitAPI = retrofit.create(MyApiEndpointInterface.class);
+
+--- Page 10 ---
+Retrofit Implementation
+-
+Call 
+myRetrofitAPI.getUsers(“12”).enqueue(new Callback<User>() {
+@Override
+public void onResponse(Call<User> call, Response<User> response) {
+// Success
+}
+@Override
+public void onFailure(Call<User> call, Throwable t) {
+//Failed
+}
+});
+
+--- Page 11 ---
+Classwork
+●Create a List screen using RecyclerView
+●Load data from api: https://jsonplaceholder.typicode.com/posts
+●Show data on RecyclerView
+(More apis: https://jsonplaceholder.typicode.com/ )
+
+--- Page 12 ---
+References
+●https://guides.codepath.com/android/consuming-apis-with-retrofit
+●https://jsonplaceholder.typicode.com/
+

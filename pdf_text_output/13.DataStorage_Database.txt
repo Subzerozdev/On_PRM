@@ -1,0 +1,556 @@
+--- Page 1 ---
+Data Storage
+
+--- Page 2 ---
+Contents
+●Shared Preferences
+●Internal/External Files
+●Sqlite
+●Room database
+
+--- Page 3 ---
+Shared Preferences
+-
+Shared Preferences allows activities and applications to keep 
+preferences, in the form of key-value pairs
+-
+Android stores Shared Preferences settings as XML file in 
+shared_prefs folder under DATA/data/{application package} directory
+-
+To get access to the preferences, we have APIs:
+-
+getPreferences() : used from within your Activity, to access activity-
+specific preferences
+-
+getSharedPreferences() : used from within your Activity (or other 
+application Context), to access application-level preferences
+
+--- Page 4 ---
+Shared Preferences
+-
+Implement:
+-
+getSharedPreferences (String PREFS_NAME, int mode)
+PREFS_NAME is the name of the file.
+mode is the operating mode.
+
+--- Page 5 ---
+Shared Preferences
+-
+Initialization
+SharedPreferences pref = getApplicationContext().getSharedPreferences("MyPref",    
+Context.MODE_PRIVATE);
+Editor editor = pref.edit();
+-
+Storing Data
+
+--- Page 6 ---
+Shared Preferences
+-
+Retrieving Data
+-
+Clearing or Deleting Data:
+-
+remove(“key_name”) is used to delete that particular value.
+-
+clear() is used to remove all data
+
+--- Page 7 ---
+File Storage
+●External storage -- Public directories
+●Internal storage -- Private directories for just your app
+Apps can browse the directory structure
+Structure and operations similar to Linux and java.io
+
+--- Page 8 ---
+File Storage
+●Internal storage is best when
+○you want to be sure that neither the user nor other apps can access your 
+files
+●External storage is best for files that
+○don't require access restrictions 
+○you want to share with other apps
+○you allow the user to access with a computer
+
+--- Page 9 ---
+File Storage
+●Internal Storage
+○
+Always available
+○
+Uses device's filesystem
+○
+Only your app can access files, unless explicitly set to be readable or 
+writable
+○
+On app uninstall, system removes all app's files from internal storage
+
+--- Page 10 ---
+File Storage
+●External storage
+○
+Not always available, can be removed
+○
+Uses device's file system or physically external storage like SD card
+○
+World-readable, so any app can read
+○
+On uninstall, system does not remove files private to app
+
+--- Page 11 ---
+Using Internal Storage
+●An activity has methods you can call to read/write files: 
+○
+getFilesDir() - returns internal directory for your app 
+○
+getCacheDir() - returns a "temp" directory for scrap files
+○
+getResources().openRawResource(R.raw.id) - read an input file from 
+res/raw/ 
+○
+openFileInput("name", mode) - opens a file for reading 
+○
+openFileOutput("name", mode) - opens a file for writing
+
+--- Page 12 ---
+Using Internal Storage – Example 1
+
+--- Page 13 ---
+Using Internal Storage – Example 2
+
+--- Page 14 ---
+Using External Storage
+●Must explicitly request permission
+●Methods to read/write external storage: 
+○
+getExternalFilesDir("name") - returns "private" external directory for 
+your app with the given name 
+○
+Environment.getExternalStoragePublicDirectory(name) - returns public 
+directory for common files like photos, music, etc. 
+<uses-permission 
+android:name="android.permission.WRITE_EXTERNAL_STORAGE" />
+<uses-permission 
+android:name="android.permission.READ_EXTERNAL_STORAGE" />
+
+--- Page 15 ---
+External Storage – Example
+
+--- Page 16 ---
+External Storage - Checking if storage is available
+
+--- Page 17 ---
+Assignment
+●In LoginActivity, using SharedPreference to handle:
+○
+If user has not login app, show LoginActivity
+○
+If user logined app, show HomeActivity
+
+--- Page 18 ---
+Sqlite database
+●Store data in tables of rows and columns (spreadsheet…)
+●Field = intersection of a row and column
+●Fields contain data, references to other fields, or references to other 
+tables
+●Rows are identified by unique IDs
+●Column names are unique per table
+
+--- Page 19 ---
+Sqlite database
+●Table
+WORD_LIST_TABLE
+_id
+word
+definition
+1
+"alpha"
+"first letter"
+2
+"beta"
+"second letter"
+3
+"alpha"
+"particle"
+
+--- Page 20 ---
+SQL basic operations 
+●Insert rows
+●Delete rows
+●Update values in rows
+●Retrieve rows that meet given criteria
+
+--- Page 21 ---
+SQL Query 
+21
+●SELECT word, description 
+FROM WORD_LIST_TABLE 
+WHERE word="alpha"
+Generic
+●SELECT columns 
+FROM table 
+WHERE column="value"
+
+--- Page 22 ---
+SELECT columns FROM table
+22
+●SELECT columns
+○
+Select the columns to return
+○
+Use * to return all columns
+●FROM table—specify the table from which to get results
+
+--- Page 23 ---
+WHERE column="value"
+23
+●WHERE—keyword for conditions that have to be met
+●column="value"—the condition that has to be met
+○common operators: =, LIKE, <, >
+
+--- Page 24 ---
+AND, ORDER BY, LIMIT
+24
+SELECT _id FROM WORD_LIST_TABLE WHERE word="alpha" AND 
+definition LIKE "%art%" ORDER BY word DESC LIMIT 1 
+●AND, OR—connect multiple conditions with logic operators
+●ORDER BY—omit for default order, or ASC for ascending, DESC for 
+descending
+●LIMIT—get a limited number of results
+
+--- Page 25 ---
+Sample queries
+25
+1
+SELECT * FROM 
+WORD_LIST_TABLE
+Get the whole table
+2
+SELECT word, definition 
+FROM 
+WORD_LIST_TABLE 
+WHERE _id > 2 
+Returns
+[["alpha", "particle"]]
+
+--- Page 26 ---
+More sample queries
+26
+3
+SELECT _id FROM 
+WORD_LIST_TABLE 
+WHERE word="alpha" AND 
+definition LIKE "%art%"
+Return id of word alpha with 
+substring "art" in definition 
+[["3"]]
+4
+SELECT * FROM 
+WORD_LIST_TABLE 
+ORDER BY word DESC 
+LIMIT 1  
+Sort in reverse and get first item. 
+Sorting is by the first column (_id) 
+[["3","alpha","particle"]]
+
+--- Page 27 ---
+Last sample query
+27
+5
+SELECT * FROM 
+WORD_LIST_TABLE 
+LIMIT 2,1  
+Returns 1 item starting at position 2. 
+Position counting starts at 1 (not zero!). 
+Returns 
+[["2","beta","second letter"]]
+
+--- Page 28 ---
+rawQuery() 
+28
+String query = "SELECT * FROM WORD_LIST_TABLE";
+rawQuery(query, null);
+query = "SELECT word, definition FROM WORD_LIST_TABLE 
+WHERE _id> ? ";
+String[] selectionArgs = new String[]{"2"}
+rawQuery(query, selectionArgs);
+
+--- Page 29 ---
+query() 
+29
+SELECT * FROM 
+WORD_LIST_TABLE
+WHERE word="alpha"
+ORDER BY word ASC
+LIMIT 2,1;
+Returns:
+[["alpha", "particle"]]
+String table = "WORD_LIST_TABLE"
+String[] columns = new String[]{"*"};
+String selection = "word = ?"
+String[] selectionArgs = new String[]{"alpha"};
+String groupBy = null;
+String having = null;
+String orderBy = "word ASC"
+String limit = "2,1"
+query(table, columns, selection, selectionArgs, groupBy, 
+having, orderBy, limit);
+
+--- Page 30 ---
+Cursors 
+30
+Queries always return a Cursor object
+Cursor is an object interface that provides random read-write access to 
+the result set returned by a database query
+⇒Think of it as a pointer to table rows
+
+--- Page 31 ---
+Using sqlite
+●
+SQLiteDatabase db = openOrCreateDatabase( "name", MODE_PRIVATE, null); 
+db.execSQL("SQL query");
+●
+Methods: 
+○
+– db.beginTransaction(), db.endTransaction() 
+○
+– db.delete("table", "whereClause" , args) 
+○
+– db.deleteDatabase(file) 
+○
+– db.insert("table", null, values) 
+○
+– db.query(...) 
+○
+– db.rawQuery("SQL query", args) 
+○
+– db.replace("table", null, values) 
+○
+– db.update("table", values, "whereClause", args) 
+
+--- Page 32 ---
+Using sqlite
+●
+ContentValues can be optionally used as a level of abstraction for statements like 
+INSERT, UPDATE, REPLACE   
+ContentValues cvalues = new ContentValues(); 
+cvalues.put("columnName1", value1); 
+cvalues.put("columnName2", value2); 
+... 
+db.insert("tableName", null, cvalues);
+db.execSQL("INSERT INTO tableName (" + columnName1 + ", " 
++ columnName2 + ") VALUES (" + value1 + ", " + value2 + ")"); 
+
+--- Page 33 ---
+Using sqlite
+●SQLiteOpenHelper class provides the functionality to use the 
+SQLite database
+Constructor
+Description
+SQLiteOpenHelper(Context
+context,
+String
+name, SQLiteDatabase.CursorFactory factory,
+int version)
+creates an object for creating,
+opening
+and
+managing
+the
+database.
+SQLiteOpenHelper(Context
+context,
+String
+name, SQLiteDatabase.CursorFactory factory,
+int
+version,
+DatabaseErrorHandler
+errorHandler)
+creates an object for creating,
+opening
+and
+managing
+the
+database. It specifies the error
+handler.
+
+--- Page 34 ---
+Using sqlite
+Method
+Description
+public abstract void onCreate(SQLiteDatabase
+db)
+called only once when database is created for the
+first time.
+public
+abstract
+void
+onUpgrade(SQLiteDatabase db, int oldVersion,
+int newVersion)
+called when database needs to be upgraded.
+public synchronized void close ()
+closes the database object.
+public void onDowngrade(SQLiteDatabase db,
+int oldVersion, int newVersion)
+called when database needs to be downgraded.
+
+--- Page 35 ---
+Using sqlite
+Method
+Description
+void execSQL(String sql)
+executes the sql query not select query.
+long insert(String table, String nullColumnHack, ContentValues
+values)
+inserts a record on the database. The table specifies the table name,
+nullColumnHack
+doesn't
+allow
+completely
+null
+values.
+If
+second
+argument is null, android will store null values if values are empty. The
+third argument specifies the values to be stored.
+int update(String table, ContentValues values, String whereClause,
+String[] whereArgs)
+updates a row.
+Cursor query(String table, String[] columns, String selection,
+String[]
+selectionArgs, String groupBy, String
+having,
+String
+orderBy)
+returns a cursor over the resultset.
+
+--- Page 36 ---
+Room database
+●Room is a robust SQL object 
+mapping library
+●Generates SQLite Android code
+
+--- Page 37 ---
+Room database
+●Room works with DAO and 
+Entities
+●Entities define the database 
+schema
+●DAO provides methods to access 
+database
+RoomDatabase
+SQLite
+DAO
+LiveData
+LiveData
+Entity
+
+--- Page 38 ---
+Using Room database
+●Add library
+●Create Entity
+●Create DAO
+●Create Database
+
+--- Page 39 ---
+Using Room database
+●Add library
+// Room components
+implementation "androidx.room:room-runtime:$rootProject.roomVersion"
+annotationProcessor "androidx.room:room-compiler:$rootProject.roomVersion"
+androidTestImplementation "androidx.room:room-testing:$rootProject.roomVersion" 
+
+--- Page 40 ---
+Using Room database
+●Create Entity
+
+--- Page 41 ---
+Using Room database
+●Create DAO
+
+--- Page 42 ---
+Using Room database
+●Create database
+○
+Create public abstract class extending RoomDatabase
+○
+Annotate as @Database
+○
+Declare entities for database schema 
+and set version number
+@Database(entities = {Word.class}, version = 1)
+public abstract class WordRoomDatabase extends RoomDatabase
+
+--- Page 43 ---
+Using Room database
+@Database(entities = {Word.class}, version = 1)
+public abstract class WordRoomDatabase 
+extends RoomDatabase { 
+public abstract WordDao wordDao();
+private static WordRoomDatabase INSTANCE;
+// ... create instance here
+}
+Create 
+database 
+as singleton 
+instance
+DAO for 
+database
+Entity 
+defines
+DB schema
+
+--- Page 44 ---
+Using Room database
+●Use Database builder
+○
+Use Room's database builder to create the database
+○
+Create DB as singleton instance
+private static WordRoomDatabase INSTANCE;
+INSTANCE = Room.databaseBuilder(...)
+.build();
+
+--- Page 45 ---
+Room database creation example
+static WordRoomDatabase getDatabase(final Context context) {
+if (INSTANCE == null) {
+synchronized (WordRoomDatabase.class) {
+if (INSTANCE == null)    {
+INSTANCE = Room.databaseBuilder(
+context.getApplicationContext(),
+WordRoomDatabase.class, "word_database")
+.build();
+}}}
+return INSTANCE;
+
+--- Page 46 ---
+Classwork
+●Create a database in sqlite, named “goods.db”
+●Create a table, named “product”
+●Load data into the recyclerview (slot 10) 
+●Create Insert/Update/Delete function for Product screen
+Id
+ProductName
+Product Description
+ProductPrice
+1
+Laptop
+Abc…
+20.000.000
+2
+Smartphone
+Xyz…
+15.000.00
+3
+Headphone
+Kzz…
+1000.000
+
+--- Page 47 ---
+References
+●https://developer.android.com/codelabs/android-room-with-a-
+view#0
+●https://google-developer-training.github.io/android-developer-
+fundamentals-course-concepts-v2/
+

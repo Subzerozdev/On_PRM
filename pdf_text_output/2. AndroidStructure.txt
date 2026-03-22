@@ -1,0 +1,222 @@
+--- Page 1 ---
+Android Application Structure
+
+--- Page 2 ---
+Contents
+•
+Android project structure
+•
+Build the first application
+•
+Android application components
+
+--- Page 3 ---
+Android project structure
+
+--- Page 4 ---
+Android project structure
+Contains your stub Activity file, which is stored  at
+src/your/package/ActivityName.java.
+All other source code files go here as well.
+
+--- Page 5 ---
+Android project structure
+Contains application  resources, such as  drawable files, layout 
+files,  and string values, animation, 
+
+--- Page 6 ---
+Android project structure
+For bitmap files (PNG, JPEG, or GIF),  9-Patch image files, and 
+XML files that  describe Drawable shapes or a  Drawable objects 
+that contain multiple  states (normal, pressed, or focused)
+
+--- Page 7 ---
+Android project structure
+For bitmap files (PNG, JPEG, or GIF),  9-Patch image files, and 
+XML files that  describe Drawable shapes or a  Drawable objects 
+that contain multiple  states (normal, pressed, or focused)
+
+--- Page 8 ---
+Android project structure
+XML files that are compiled into  screen layouts (or 
+part of a screen)
+
+--- Page 9 ---
+Android project structure
+The mipmap folder allows you to include different versions of your 
+app’s launcher icon, optimized for each screen density. This 
+ensures that the icon appears sharp and clear on all devices, 
+regardless of screen resolution.
+
+--- Page 10 ---
+Android project structure
+For XML files that are compiled into many  kinds of resource
+
+--- Page 11 ---
+Android project structure
+•
+Asset folder: For arbitrary raw 
+asset files. Saving asset  files here 
+instead of in the assets/ directory  
+only differs in the way that you 
+access them. 
+•
+Menu folder: For XML files that 
+define application menus
+Create other sub resource folders
+•
+Etc.
+
+--- Page 12 ---
+Android project structure
+The control file that describes the nature of 
+the  application and each of its components. 
+
+--- Page 13 ---
+Android project structure
+For miscellaneous XML files that configure  application components.
+
+--- Page 14 ---
+Android project structure
+Two build.gradle files
+•
+Level project: config for all project 
+•
+Level module: config for modules in project. Each module has one 
+build.gradle file
+
+--- Page 15 ---
+Android project structure
+This file defines how ProGuard optimizes and  obfuscates your code
+
+--- Page 16 ---
+Build the first application
+Start Android Studio
+
+--- Page 17 ---
+Create a project inside Android Studio
+
+--- Page 18 ---
+Pick activity template
+•
+Choose templates for common 
+activities, such as maps or 
+navigation drawers.
+•
+Pick Empty Activity or Basic 
+Activity for simple and custom 
+activities.
+
+--- Page 19 ---
+Name your activity
+●
+Good practice:
+○
+Name main activity  
+MainActivity
+○
+Name layout 
+activity_main
+●
+Use AppCompat
+●
+Generating layout file is 
+convenient
+
+--- Page 20 ---
+Run your app
+2. Run
+1. Select virtual or 
+physical device
+
+--- Page 21 ---
+Create a virtual device
+Use emulators to test app on different versions of Android and form factors. 
+Device Manager > Create Virtual Device                  
+
+--- Page 22 ---
+Configure virtual device
+1. Choose hardware
+2. Select Android version
+3. Finalize
+
+--- Page 23 ---
+Run on a virtual device
+
+--- Page 24 ---
+Run on a physical device
+1. Turn on Developer Options: 
+a.
+Settings > About phone
+b. Tap Build number seven times 
+2. Turn on USB Debugging
+a.
+Settings > Developer Options > USB 
+Debugging
+3. Connect phone to computer with cable
+
+--- Page 25 ---
+Android Application Components
+Activities – visual user interface focused on a single thing a 
+user can do
+Services – no visual interface – they run in the background
+Broadcast Receivers – receive and react to broadcast 
+announcements
+Content Providers – allow data exchange between 
+applications
+
+--- Page 26 ---
+Activities
+Basic component of most applications
+Most applications have several activities that start each other as 
+needed
+Each is implemented as a subclass of the base Activity class
+
+--- Page 27 ---
+Activities – The View
+Each activity has a default window to draw in (although it may 
+prompt for dialogs or notifications)
+The content of the window is a view or a group of views (derived 
+from View or View Group)
+Example of views: buttons, text fields, scroll bars, menu items, 
+check boxes, etc.
+View(Group) made visible via Activity.setContentView() method.
+
+--- Page 28 ---
+Services
+Does not have a visual interface
+Runs in the background indefinitely 
+Examples
+Network Downloads
+Playing Music
+TCP/UDP Server
+You can bind to an existing service and control its operation
+
+--- Page 29 ---
+Broadcast Receivers
+Receive and react to broadcast announcements
+Extend the BroadcastReceiver class
+Examples of broadcasts:
+Low battery, power connected, shutdown, time zone changed, etc.
+Other applications can initiate broadcasts
+
+--- Page 30 ---
+Content Providers
+Makes some of the application data available to other applications
+It’s the only way to transfer data between applications in Android (no 
+shared files, shared memory, pipes, etc.)
+Extends the ContentProvider class
+Other applications use a ContentResolver object to access the data 
+provided via a ContentProvider object
+
+--- Page 31 ---
+Classwork
+•
+Build and Run a Hello app
+
+--- Page 32 ---
+References
+•
+https://google-developer-training.github.io/android-developer-
+fundamentals-course-concepts-v2/
+

@@ -1,0 +1,242 @@
+--- Page 1 ---
+Android architecture
+
+--- Page 2 ---
+Contents
+●Architecture
+●MVP
+●
+MVVM
+
+--- Page 3 ---
+Architecture
+
+--- Page 4 ---
+Architecture
+
+--- Page 5 ---
+Sample application
+
+--- Page 6 ---
+MVC Pattern Architecture
+6
+• MVC stands for Model-View-Controller.
+
+--- Page 7 ---
+MVC components
+•
+Model: represents a set of classes that describe the business logic 
+•
+View: represents the UI components 
+•
+Controller: 
+–
+is responsible to process incoming requests. 
+–
+It receives input from users via the View, then process the user's data with the help of 
+Model and passing the results back to the View. 
+–
+it acts as the coordinator between the View and the Model.
+–
+There is One-to-Many relationship between Controller and View, means one controller 
+can handle many views
+
+--- Page 8 ---
+MVC - Model 
+
+--- Page 9 ---
+MVC - View
+
+--- Page 10 ---
+MVC - Controller
+
+--- Page 11 ---
+MVC - Advantages
+11
+• Easy to maintain, test and upgrade the multiple system.
+• Easy to add new clients just by adding their views and 
+controllers.
+• Be able to have development process in parallel for model, view and 
+controller.
+• Make the application extensible and scalable.
+
+--- Page 12 ---
+MVC - Disadvantages
+12
+• Requires high skilled experienced professionals 
+• Requires the significant amount of time to analyze and design.
+• This design approach is not suitable for smaller applications.
+
+--- Page 13 ---
+MVP Pattern
+•
+Model-View-Presenter (MVP) is a variation of the Model-View-
+Controller (MVC) pattern.
+•
+The primary differentiator of MVP is that the Presenter implements an 
+Observer design of MVC but the basic ideas of MVC remain the same: 
+–
+the model stores the data
+–
+the view shows a representation of the model
+–
+the presenter coordinates communications between the layers.
+
+--- Page 14 ---
+MVP Pattern Architecture
+14
+
+--- Page 15 ---
+MVP components
+•
+Model: The model in MVP is the same as MVC
+•
+Presenter:
+– handle user input and use this to manipulate the  model data. 
+– interactions of the User are first received by the view and then  passed to the 
+presenter for interpretation
+– there is One-to-One  relationship between View and Presenter
+•
+View: When the model is updated, the view also has to be updated to reflect the  
+changes
+
+--- Page 16 ---
+Passive view and Supervising Controller
+•
+The Model-View-Presenter variants: Passive View and Supervising  
+Controller
+•
+In Passive View:
+–
+the presenter updates the view to reflect changes in the  model.
+–
+The interaction with the model is handled exclusively by the  presenter. 
+–
+The view is not aware of changes in the model.
+•
+In Supervising Controller:
+–
+the view interacts directly with the model to  perform simple data-binding that can be defined 
+declaratively, without  presenter intervention. 
+–
+The presenter updates the model
+–
+it manipulates  the state of the view only in cases where complex UI logic that cannot be  specified 
+declaratively is required. 
+
+--- Page 17 ---
+MVP - Model
+
+--- Page 18 ---
+MVP - View
+
+--- Page 19 ---
+MVP - View
+
+--- Page 20 ---
+MVP - Presenter
+
+--- Page 21 ---
+Advantages of MVP
+21
+•
+it clarifies the structure of our user interface code and can make it easier to 
+maintain.
+•
+almost all complex screen logic will reside in the Presenter.
+•
+We have almost no code in our View apart from screen drawing code Model-
+View-Presenter also makes it theoretically much easier to replace user interface 
+components, whole screens, or even the whole user interface
+•
+It is features can be enhanced separately with more involvement from the
+customer.
+•
+In addition, unit testing the user interface becomes much easier as we can test
+the logic by just testing the Presenter.
+
+--- Page 22 ---
+MVVM Pattern
+•
+The Model-View-ViewModel (MVVM or ViewModel) is a
+pattern for separating concerns in technologies that use data-
+binding.
+•
+The MVVM pattern is an adaptation of the MVC and MVP
+patterns in which the view model provides a data model and
+behavior to the view but allows the view to declaratively bind to
+the view model.
+
+--- Page 23 ---
+MVVM Architecture
+23
+
+--- Page 24 ---
+MVVM Architecture
+
+--- Page 25 ---
+MVVM components
+•
+Model:
+– It represents the data and the business logic of the Android Application
+– It consists of the business logic - local and remote data source, model 
+classes, repository.
+•
+View:
+– It consists of the UI Code(Activity, Fragment), XML
+– It sends the user action to the ViewModel but does not get the response back 
+directly
+– To get the response, it has to subscribe to the observables which ViewModel
+exposes to it
+
+--- Page 26 ---
+MVVM components
+•
+ViewModel :
+– is a bridge between the View and Model
+– It does not have any clue which View has to use it as it does not have a direct 
+reference to the View
+– It interacts with the Model and exposes the observable that can be observed 
+by the View
+
+--- Page 27 ---
+MVVM - Model
+
+--- Page 28 ---
+MVVM - View
+
+--- Page 29 ---
+MVVM - View
+
+--- Page 30 ---
+MVVM - ViewModel
+
+--- Page 31 ---
+Advantages of MVVM
+31
+• Reduces the amount of code in the View’s code behind file.
+• UI elements can be written in XAML
+• Strong Data Binding, which saves a lot of code. No need for manually 
+refresh the view.
+
+--- Page 32 ---
+Disadvantages of MVVM
+32
+• In bigger cases, it can be hard to design the ViewModel up front in 
+order to get the right amount of generality.
+• Data-binding for all its wonders is declarative and harder to debug 
+than nice imperative stuff where you just set breakpoints.
+
+--- Page 33 ---
+Summary
+33
+
+--- Page 34 ---
+References
+●https://www.vogella.com/tutorials/AndroidArchitecture/article.html
+●https://www.slideshare.net/mudasirqazi00/design-patterns-mvc-mvp-
+and-mvvm?from_action=save
+●https://www.vogella.com/tutorials/AndroidArchitecture/article.html
+●https://academy.realm.io/posts/eric-maxwell-mvc-mvp-and-mvvm-
+on-android/
+

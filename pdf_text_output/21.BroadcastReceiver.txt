@@ -1,0 +1,160 @@
+--- Page 1 ---
+Broadcast Receiver
+
+--- Page 2 ---
+Contents
+●Broastcast
+●Broastcast receiver implementation
+
+--- Page 3 ---
+Broadcast
+●
+Broadcasts are messages sent by Android system and other Android 
+apps, when an event of interest occurs
+●
+Types of broadcast:
+○
+System broadcast: are the messages sent by the Android system, when a 
+system event occurs, that might affect your app
+○
+Custom broadcast: are broadcasts that your app sends out, similar to the 
+Android system.  
+
+--- Page 4 ---
+Broadcast Receiver
+
+--- Page 5 ---
+Broadcast Receiver
+●Broadcast receivers are app components.
+●They register for various system broadcast and or custom broadcast.
+●They are notified (via an Intent):
+○By the system, when a system event occurs that your app is registered 
+for.
+○By another app, including your own if your app is registered for that 
+custom event. 
+
+--- Page 6 ---
+Implementation
+-
+Creating the Broadcast Receiver
+-
+Extends BroadcastReceiver
+-
+Implement onReceive method
+
+--- Page 7 ---
+Implementation
+-
+Registering Broadcast Receiver
+-
+Static: Use <receiver> tag in your Manifest file. (AndroidManifest.xml)
+-
+Dynamic: Use Context.registerReceiver () method to dynamically 
+register an instance.
+
+--- Page 8 ---
+Register dynamically
+●
+Register your receiver in onCreate() or onResume().  
+// Register the receiver using the activity context.
+this.registerReceiver(mReceiver, filter);
+●Unregister in onDestroy() or onPause().
+// Unregister the receiver 
+this.unregisterReceiver(mReceiver);
+8
+
+--- Page 9 ---
+Implementation
+-
+Dynamic registration example:
+
+--- Page 10 ---
+Receiving a system broadcast 
+●Starting from Android 8.0 (API level 26), static receivers can't receive 
+most of the system broadcasts.
+●Use a dynamic receiver to register for these broadcasts. 
+●If you register for the system broadcasts in the manifest, the Android 
+system won't deliver them to your app.
+10
+
+--- Page 11 ---
+Custom Broadcast
+●Sender and receiver must agree on unique name for intent (action 
+name)
+●Define in activity and broadcast receiver
+private static final String ACTION_CUSTOM_BROADCAST =   
+“com.tutorialspoint.CUSTOM_INTENT";
+
+--- Page 12 ---
+-
+Use sendBroadcast()
+-
+Create a Broadcast Receiver
+-
+Register/Receive broadcast
+Custom Broadcast
+
+--- Page 13 ---
+Android provides three ways for sending a broadcast:
+•
+Ordered broadcast.
+•
+Normal broadcast.
+•
+Local broadcast.
+13
+Send a custom broadcast
+
+--- Page 14 ---
+Ordered Broadcast
+●
+Ordered broadcast is delivered to one receiver at a time.
+●
+To send a ordered broadcast, use the sendOrderedBroadcast()
+method.
+●
+Receivers can propagate result to the next receiver or even abort the 
+broadcast. 
+●
+Control the broadcast order with android:priority attribute in the 
+manifest file.
+●
+Receivers with same priority run in arbitrary order.
+14
+
+--- Page 15 ---
+●Delivered to all the registered receivers at the same time, in an 
+undefined order.
+●Most efficient way to send a broadcast.
+●Receivers can’t propagate the results among themselves, and they can’t 
+abort the broadcast. 
+●The sendBroadcast() method is used to send a normal broadcast.
+15
+Normal Broadcast
+
+--- Page 16 ---
+●Sends broadcasts to receivers within your app.
+●No security issues since no interprocess communication.
+●To send a local broadcast:
+○
+To get an instance of LocalBroadcastManager.
+○
+Call sendBroadcast() on the instance. 
+LocalBroadcastManager.getInstance(this)
+.sendBroadcast(customBroadcastIntent);
+16
+Local Broadcast
+
+--- Page 17 ---
+Classwork
+●Showing message on app when:
+○
+Wifi is on/off
+○
+Bluetooth is on/off
+
+--- Page 18 ---
+References
+●https://google-developer-training.github.io/android-developer-
+fundamentals-course-concepts-v2/
+

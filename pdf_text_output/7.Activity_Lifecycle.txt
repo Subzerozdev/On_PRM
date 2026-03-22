@@ -1,0 +1,292 @@
+--- Page 1 ---
+Activity & Lifecycle
+
+--- Page 2 ---
+Contents
+•
+Activities
+•
+Defining an Activity 
+•
+Activity lifecycle
+•
+Activity lifecycle callbacks
+
+--- Page 3 ---
+Activity
+•
+An Activity is an application component
+•
+Represents one window, one hierarchy of views
+•
+Java class, typically one Activity in one file
+
+--- Page 4 ---
+Activity
+
+--- Page 5 ---
+Activity
+•
+An Activity typically has a UI layout
+•
+Layout is usually defined in one or more XML files
+•
+Activity "inflates" layout as part of being created
+
+--- Page 6 ---
+Activity
+•
+Activity is a necessary component in an Android application.
+•
+MVC
+•
+MVP
+•
+MVVM
+
+--- Page 7 ---
+Activity 
+
+--- Page 8 ---
+Implement new activities
+•
+Define layout in XML
+•
+Define Activity Java class 
+– extends AppCompatActivity
+•
+Connect Activity with Layout 
+– Set content view in onCreate()
+•
+Declare Activity in the Android manifest
+
+--- Page 9 ---
+Activity Implementation
+•
+Define Activity Java class
+public class ExampleActivity extends AppCompatActivity {
+@Override
+protected void onCreate(Bundle savedInstanceState)    
+{
+super.onCreate(savedInstanceState);
+}
+}
+
+--- Page 10 ---
+Activity Implementation
+•
+Connect Activity with layout
+public class ExampleActivity extends AppCompatActivity {
+@Override
+protected void onCreate(Bundle savedInstanceState) {
+super.onCreate(savedInstanceState);
+setContentView(R.layout.activity_main);
+}
+}
+
+--- Page 11 ---
+Activity Implementation
+•
+Declaring the activity in the manifest
+•
+Declaring the activity as a launch screen
+
+--- Page 12 ---
+Activity Lifecycle
+•
+The set of states an Activity can be in during its lifetime, from when 
+it is created until it is destroyed
+
+--- Page 13 ---
+Activity states and app visibility
+•
+Created (not visible yet)
+•
+Started (visible)
+•
+Resume (visible)
+•
+Paused(partially invisible)
+•
+Stopped (hidden)
+•
+Destroyed (gone from memory)
+State changes are triggered by user action, configuration changes such 
+as device rotation, or system action 
+
+--- Page 14 ---
+Activity states and callbacks graph
+
+--- Page 15 ---
+Activity Lifecycle callbacks
+
+--- Page 16 ---
+onCreate() –> Created
+•
+Called when the Activity is first created, for example when user taps 
+launcher icon
+•
+Does all static setup: create views, bind data to lists, ... 
+•
+Only called once during an activity's lifetime
+•
+Takes a Bundle with Activity's previously frozen state, if there was 
+one
+•
+Created state is always followed by onStart()
+
+--- Page 17 ---
+onCreate(Bundle savedInstanceState)
+@Override
+public void onCreate(Bundle savedInstanceState) {
+super.onCreate(savedInstanceState);
+// The activity is being created.
+}
+
+--- Page 18 ---
+onStart() –> Started
+•
+Called when the Activity is becoming visible to user
+•
+Can be called more than once during lifecycle
+•
+Followed by onResume() if the activity comes to the foreground, or 
+onStop() if it becomes hidden
+
+--- Page 19 ---
+onStart()
+@Override
+protected void onStart() {
+super.onStart();
+// The activity is about to become visible.
+}
+
+--- Page 20 ---
+onRestart() –> Started
+•
+Called after Activity has been stopped, immediately before it is 
+started again
+•
+Transient state
+•
+Always followed by onStart()
+
+--- Page 21 ---
+onRestart()
+@Override
+protected void onRestart() {
+super.onRestart();
+// The activity is between stopped and started.
+}
+
+--- Page 22 ---
+onResume() –> Resumed/Running 
+•
+Called when Activity will start interacting with user
+•
+Activity has moved to top of the Activity stack
+•
+Starts accepting user input
+•
+Running state
+•
+Always followed by  onPause()
+
+--- Page 23 ---
+onResume()
+@Override
+protected void onResume() {
+super.onResume();
+// The activity has become visible
+// it is now "resumed"
+}
+
+--- Page 24 ---
+onPause() –> Paused
+•
+Called when system is about to resume a previous Activity
+•
+The Activity is partly visible but user is leaving the Activity
+•
+Typically used to commit unsaved changes to persistent data, stop 
+animations and anything that consumes resources 
+•
+Implementations must be fast because the next Activity is not 
+resumed until this method returns
+•
+Followed by either onResume() if the Activity returns back to the 
+front, or onStop() if it becomes invisible to the user
+
+--- Page 25 ---
+onPause()
+@Override
+protected void onPause() {
+super.onPause();
+// Another activity is taking focus 
+// this activity is about to be "paused"
+}
+
+--- Page 26 ---
+onStop() –> Stopped
+•
+Called when the Activity is no longer visible to the user
+•
+New Activity is being started, an existing one is brought in front of 
+this one, or this one is being destroyed
+•
+Operations that were too heavy-weight for onPause()
+•
+Followed by either onRestart() if Activity is coming back to interact 
+with user, or onDestroy() if Activity is going away
+
+--- Page 27 ---
+onStop()
+@Override
+protected void onStop() {
+super.onStop();
+// The activity is no longer visible
+// it is now "stopped"
+}
+
+--- Page 28 ---
+onDestroy() –> Destroyed
+•
+Final call before Activity is destroyed
+•
+User navigates back to previous Activity, or configuration changes
+•
+Activity is finishing or system is destroying it to save space
+•
+Call isFinishing() method to check
+•
+System may destroy Activity without calling this, so use onPause() 
+or onStop() to save data or state
+
+--- Page 29 ---
+onDestroy()
+@Override
+protected void onDestroy() {
+super.onDestroy();
+// The activity is about to be destroyed.
+}
+
+--- Page 30 ---
+Some methods related to activity lifecyle
+•
+finish()
+•
+OnBackPressedDispatcher
+OnBackPressedDispatcher onBackPressedDispatcher = getOnBackPressedDispatcher();
+onBackPressedDispatcher.addCallback(this, new OnBackPressedCallback(true) {
+@Override
+public void handleOnBackPressed() {
+// Handle back button press
+}
+});
+
+--- Page 31 ---
+References
+•
+https://google-developer-training.github.io/android-developer-
+fundamentals-course-concepts-v2/
+

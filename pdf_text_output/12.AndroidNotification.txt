@@ -1,0 +1,226 @@
+--- Page 1 ---
+Android Notification
+
+--- Page 2 ---
+Contents
+●What are notifications?
+●Notification channels
+●Creating a notification channel
+●Creating notifications
+●Handling notification actions
+
+--- Page 3 ---
+What are notifications
+●Notification: A message displayed to the user 
+outside of any app's UI in a top notification 
+drawer area. 
+– used to indicate system events, status 
+of service tasks, etc.
+
+--- Page 4 ---
+What are notifications
+●Notifications can have: 
+○
+icons (small, large) 
+○
+a title 
+○
+a detailed description
+○
+one or more associated actions that will occur when clicked 
+○
+..
+
+--- Page 5 ---
+●
+New notifications are displayed as a colored "badge" 
+(also known as a "notification dot") on the app icon.
+●
+Users can long-press on an app icon to see the 
+notifications for that app. Similar to the notification 
+drawer.
+5
+App icon badge
+- Available only on the devices running Android 8.0 (API level 26) and 
+higher.
+
+--- Page 6 ---
+6
+Notification channels
+●Used to create a user-customizable channel for each type of 
+notification to be displayed.
+●More than one notification can be grouped in to a channel.
+●Set notification behavior like sound, light, vibrate and so on, applied 
+to all the notifications in that channel. 
+
+--- Page 7 ---
+Notification channels are mandatory
+●Notification channels are introduced in Android 8.0 (API level 26)
+●All notifications must be assigned to a channel starting from Android 
+8.0 (API level 26), else your notifications will not be displayed.
+●For the apps targeting lower than Android 8.0 (API level 26), no need 
+to implement notification channels. 
+7
+
+--- Page 8 ---
+Notification channels in Settings
+●Notification channels appear as 
+Categories under App notifications in 
+the device Settings.
+8
+
+--- Page 9 ---
+Create a Notification channel
+9
+●
+Notification channel instance is created using  NotificationChannel constructor.
+●
+You must specify:
+○
+An ID  that's unique within your package.
+○
+User visible name of the channel.
+○The importance level for the channel.
+if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.O) {
+NotificationChannel notificationChannel = 
+new NotificationChannel(CHANNEL_ID, "Mascot Notification",
+NotificationManager.IMPORTANCE_DEFAULT);
+}
+
+--- Page 10 ---
+Importance level
+10
+●Available in Android 8.0 (API level 26) and higher.
+●Sets the intrusion level, like the sound and visibility for all notifications 
+posted in the channel.
+●Range from IMPORTANCE_NONE(0) to IMPORTANCE_HIGH(4).
+●To support earlier versions of Android (Lower than API level 26), set 
+the priority.
+
+--- Page 11 ---
+Notification priority 
+●Determines how the system displays the notification with respect to 
+other notifications, in Android version Lower than API level 26.
+●Set using the setPriority() method for each notification.
+●Range from PRIORITY_MIN to PRIORITY_MAX.
+setPriority(NotificationCompat.PRIORITY_HIGH)
+11
+
+--- Page 12 ---
+Importance level and priority constants
+12
+User-visible importance level
+Importance (Android 
+8.0 and higher)
+Priority (Android 7.1 
+and lower)
+Urgent
+Makes a sound and appears as a heads-up 
+notification
+IMPORTANCE_HIGH
+PRIORITY_HIGH or 
+PRIORITY_MAX
+High
+Makes a sound
+IMPORTANCE_DEFAU
+LT
+PRIORITY_DEFAUL
+T
+Medium
+No sound
+IMPORTANCE_LOW
+PRIORITY_LOW
+Low
+No sound and doesn't appear in the status bar
+IMPORTANCE_MIN
+PRIORITY_MIN
+
+--- Page 13 ---
+Creating notifications
+●
+Notification is created using NotificationCompat.Builder class.
+●
+Pass the application context and notification channel ID to the 
+constructor.
+●
+The NotificationCompat.Builder constructor takes the notification 
+channel ID, this is only used by Android 8.0 (API level 26) and higher, 
+but this parameter is ignored by the older versions.
+NotificationCompat.Builder mBuilder = new    
+NotificationCompat.Builder(this, CHANNEL_ID);
+
+--- Page 14 ---
+Setting notification contents
+1. A small icon, set by setSmallIcon(). 
+This is the only content that's required.
+1. A title, set by setContentTitle().
+2. The body text, set by 
+setContentText(). This is the 
+notification message.
+
+--- Page 15 ---
+Setting notification contents
+NotificationCompat.Builder mBuilder =
+new NotificationCompat.Builder(this, CHANNEL_ID)
+.setSmallIcon(R.drawable.android_icon)
+.setContentTitle("You've been notified!")
+.setContentText("This is your notification text.");
+
+--- Page 16 ---
+Delivering notifications
+Notification notification = mBuilder.build();
+NotificationManager manager = (NotificationManager) 
+getSystemService(Context.NOTIFICATION_SERVICE); 
+manager.notify(ID, notification)
+
+--- Page 17 ---
+1. Update a notification by changing and or adding some of its content.
+2. Issue notification with updated parameters using builder.
+3. Call notify() passing in the same notification ID.
+●If previous notification is still visible, system updates.
+●If previous notification has been dismissed, new notification is 
+delivered.
+17
+Updating notifications
+
+--- Page 18 ---
+Notifications remain visible until:
+●User dismisses it by swiping or by using "Clear All".
+●Calling setAutoCancel() when creating the notification, removes 
+it from the status bar when the user clicks on it.
+●App calls cancel() or cancelAll() on 
+NotificationManager.
+mNotifyManager.cancel(NOTIFICATION_ID);
+18
+Canceling notifications
+
+--- Page 19 ---
+Handling notification actions
+●
+Normally when the user clicks on a notification, an action should occur. (direct the user to a 
+particular app / activity, etc.)
+– To achieve this, use an intent inside your notification.
+– Must wrap it inside a "pending intent" object.
+Notification.Builder builder = ...;
+Intent intent = new Intent(this, ActivityClassName.class);
+intent.putExtra("key1", "value1");
+...
+PendingIntent pending = PendingIntent.getActivity(
+this, 0, intent, 0);
+builder.setContentIntent(pending);
+Notification notification = builder.build();
+19
+
+--- Page 20 ---
+Classwork
+●When opening the app, if there is product in the cart
+○
+Show a notification on status bar to remind user about selected products
+○
+When clicking on the notification, open a Cart screen
+
+--- Page 21 ---
+References
+●https://google-developer-training.github.io/android-developer-
+fundamentals-course-concepts-v2/
+

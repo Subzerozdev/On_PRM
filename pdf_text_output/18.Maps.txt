@@ -1,0 +1,277 @@
+--- Page 1 ---
+Maps, Geocoding, and Location-
+Based Services
+
+--- Page 2 ---
+Contents
+●Add Google Map to Android application
+●Google Map methods
+●Access phone’s position
+
+--- Page 3 ---
+Add Google Map to Android application
+●Add Google Play Services to project
+●Add MapFragment
+●Get an API key
+●Add permission to AndroidManifest.xml 
+●Wait for map to be ready
+
+--- Page 4 ---
+Step 1: Add Google Play Services to project
+●add Google Play to project in app's build.gradle file 
+dependencies { 
+implementation fileTree(dir: 'libs', include: ['*.jar’]) 
+implementation 'com.google.android.gms:play-services:18.0.0’ 
+} 
+
+--- Page 5 ---
+2. Add MapFragment
+
+--- Page 6 ---
+Step 2: Add MapFragment
+●
+Google Maps API provides a fragment class named MapFragment for 
+displaying a map within an activity.
+<?xml version="1.0" encoding="utf-8"?>
+<fragment xmlns:android="http://schemas.android.com/apk/res/android"
+xmlns:tools="http://schemas.android.com/tools"
+android:id="@+id/map"
+android:name="com.google.android.gms.maps.SupportMapFragment"
+android:layout_width="match_parent"
+android:layout_height="match_parent"
+tools:context=".MapsFragment" />
+
+--- Page 7 ---
+Step 2: Add MapFragment
+After add fragment, some codes is generated as below
+Include the direction link and meta-data
+
+--- Page 8 ---
+Step 2: Add MapFragment
+Go to the link from the direcdtion from manifest file 
+https://developers.google.com/maps/documentation/android-sdk/get-
+api-key
+Go to the google console to create project, put SHA-1 (step 3)
+
+--- Page 9 ---
+Step 3: Get an API key
+Google won't allow you to fetch 
+map data without an API key. 
+Get SHA1 key 
+By running signingReport from
+android studio.
+
+--- Page 10 ---
+Step 3: Get an API key
+●
+Other way to get SHA1 key, open a Terminal and find the file debug.keystore: 
+Windows (new): C:\Users\USERNAME\.android 
+Windows (old): C:\Documents and Settings\USERNAME\.android
+Linux: /home/USERNAME/.android/ 
+Mac: /Users/USERNAME/.android/ 
+In the terminal or command prompt, cd to that directory, then type and run: 
+keytool -list -v -keystore debug.keystore
+(it asks for a password, so just press Enter) 
+Find the line with your "Certificate fingerprint" for "SHA-1". It should 
+contain a long string in this format. Copy it down. 
+BD:2B:3F:4B:......... 
+
+--- Page 11 ---
+Step 3: Get an API key
+●Second: Go to the Google APIs developer console: 
+○
+Create project
+Link: https://code.google.com/apis/console/ 
+○
+Enable API
+○
+choose Android Key 
+○
+paste in the SHA-1 key you got from the previous slide
+
+--- Page 12 ---
+Step 3: Get an API key
+●After create project
+And enable API
+
+--- Page 13 ---
+Step 3: Get an API key
+●Cancel billing and select 
+“Credentails” from menu 
+
+--- Page 14 ---
+Step 3: Get an API key
+●Create API key
+
+--- Page 15 ---
+Step 3: Get an API key
+●Key generated
+●Copy it and patse to
+The manifest file
+
+--- Page 16 ---
+Step 3: Get an API key
+Key is patsed to meta-data
+
+--- Page 17 ---
+Step 4. AndroidManifest.xml add permissions
+●Because of privacy issues, to access phone's current location, must 
+request permission in AndroidManifest.xml:
+<manifest ...>
+<uses-permission android:name="android.permission.INTERNET" />
+<uses-permission
+android:name="android.permission.ACCESS_COARSE_LOCATION" />
+<uses-permission
+android:name="android.permission.ACCESS_FINE_LOCATION" />
+<application ...>
+...
+</application>
+</manifest>
+
+--- Page 18 ---
+Step 4. AndroidManifest.xml add permissions
+●
+ACCESS_COARSE_LOCATION Permission:
+Purpose: allows an app to access approximate location based on network sources
+such as cell towers and Wi-Fi. The location obtained is less precise than using GPS
+but consumes less power.
+Typical Usage: Apps that require location services but do not need pinpoint
+accuracy may request this permission. Examples include weather only need to know
+which city or area you are in rather than your exact position.
+●
+ACCESS_FINE_LOCATION Permission:
+Purpose: allows an app to access precise location data, typically from GPS, but it
+can also include data from Wi-Fi and mobile networks to provide a highly accurate
+location.
+Typical Usage: Apps that require precise location tracking, such as navigation apps
+(e.g., Google Maps) or apps with geotagging features.
+
+--- Page 19 ---
+Step 5: Wait for map to be ready 
+
+--- Page 20 ---
+GoogleMap methods
+●placing items on the map: 
+○
+addCircle, addGroundOverlay, addMarker, addPolygon, addPolyline, 
+addTileOverlay
+○
+clear - Removes all markers, polylines/polygons, overlays 
+●manipulating the camera: 
+○
+getCameraPosition, moveCamera, animateCamera, stopAnimation
+●map settings and appearance: 
+○
+setBuildingsEnabled, setIndoorEnabled, setMapType, setPadding, 
+setTrafficEnabled
+
+--- Page 21 ---
+GoogleMap methods
+●snapshot - take a screen shot of the map as a bitmap 
+●event listeners: 
+○
+setOnCameraChangeListener, setOnMapClickListener, 
+setOnMapLoadedCallback, setOnMapLongClickListener, 
+setOnMarkerClickListener, setOnMarkerDragListener, 
+setOnMyLocationChangeListener
+
+--- Page 22 ---
+The map's camera 
+●The current viewing window of a map's camera is defined by: 
+○
+target location (latitude/longitude), zoom (2.0 - 21.0), 
+○
+bearing (orientation/rotation), and tilt (degrees)
+
+--- Page 23 ---
+Set camera in XML
+●Set initial map settings and camera position in the layout XML: 
+<fragment ...
+android:name="com.google.android.gms.maps.MapFragment"
+android:id="@+id/ID"
+map:cameraBearing="112.5"
+map:cameraTargetLat="-33.796923"
+map:cameraTargetLng="150.922433"
+map:cameraTilt="30"
+map:cameraZoom="13"
+map:mapType="normal"
+map:uiCompass="false"
+map:uiRotateGestures="true"
+map:uiScrollGestures="false"
+map:uiTiltGestures="true"
+map:uiZoomControls="false"
+map:uiZoomGestures="true" />
+
+--- Page 24 ---
+Set camera in Java code
+●CameraUpdateFactory methods: 
+○
+newLatLng(new LatLng(lat, lng)) 
+○
+newLatLngBounds(new LatLngBounds(SW, NE), padding) 
+○
+newLatLngZoom(new LatLng(lat, lng), zoom) 
+○
+newCameraPosition(CameraPosition) 
+○
+others:
+LatLngBounds bounds = new LatLngBounds( 
+new LatLng(20, -130.0), // SW 
+new LatLng(55, -70.0)); // NE
+map.moveCamera(CameraUpdateFactory.newLatLngBounds(bounds, 50)); 
+
+--- Page 25 ---
+Placing markers
+●
+A GoogleMap object has an addMarker method that 
+can let you put "push pin" markers at locations on 
+the map. 
+○
+The marker's methods return the marker, so you can chain 
+them. 
+○
+options: alpha, draggable, icon, position, rotation, title, 
+visible, ...
+map.addMarker(new MarkerOptions() 
+.position(new LatLng(40.801, -96.691)) 
+.title("Lincoln, NE") );
+Marker mark = map.addMarker(new MarkerOptions() ...); 
+mark.remove(); 
+
+--- Page 26 ---
+Lines and paths
+●A GoogleMap object has an addPolyline method that can let you 
+put lines between locations on the map.
+○
+options: color, visible, width, zIndex, ...
+map.addPolyline(new PolylineOptions()
+.add(new LatLng(40.801, -96.691)) // Lincoln, NE
+.add(new LatLng(34.020, -118.412)) // Los Angeles, CA
+.add(new LatLng(40.703, -73.980)) // New York, NY
+);
+Polyline polly = map.addPolyline(...); polly.remove(); 
+
+--- Page 27 ---
+Accessing phone's location
+●Android LocationManager gives you the phone's position: 
+○
+GPS provider provides highest accuracy 
+○
+Network provider is a fallback in case GPS is disabled / not present
+
+--- Page 28 ---
+Location update events
+●Track user's movement by listening for location update events
+
+--- Page 29 ---
+Classwork
+●Create a Google Map screen
+●Create a marker showing your current location on the Map
+
+--- Page 30 ---
+References
+●CS 193A Standford course - Marty Stepp and Stanford Computer 
+Science
+●https://developers.google.com/maps/documentation/android-
+sdk/map-with-marker
+

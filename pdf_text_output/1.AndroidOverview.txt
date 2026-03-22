@@ -1,0 +1,198 @@
+--- Page 1 ---
+Android Overview
+
+--- Page 2 ---
+Contents
+•
+Android operating system
+•
+Android platform architecture
+•
+Android versions
+
+--- Page 3 ---
+Android operating system
+•
+Android is a Linux-based operating system
+•
+Open source
+– https://source.android.com/
+– Just the OS, not the Play store or Google play 
+services
+•
+User Interface for touch screens
+•
+Highly customizable for devices / by vendors
+
+--- Page 4 ---
+Android Ecosystem
+•
+Android - phones and tablets 
+•
+Android wear - smartwatch 
+–
+Extended notification center 
+•
+Android TV - televisions, consoles 
+–
+Native TV app experience for IPTV 
+•
+Android auto - cars 
+–
+Connecting phone with the car 
+•
+Android things 
+–
+Platform for IoT 
+•
+Google glass
+
+--- Page 5 ---
+Android Platform Architecture
+1. Linux Kernel
+2. HAL: Expose device hardware capabilities
+3. Expose native APIs; run apps
+4. Java API Framework: Android OS API in Java 
+framework
+5. System and user apps
+1
+4
+2
+3
+5
+
+--- Page 6 ---
+Android Platform Architecture
+1. Linux Kernel
+•
+Threading and low-level memory management
+•
+Security features
+•
+Drivers
+
+--- Page 7 ---
+Android Platform Architecture
+2. Hardware Abstraction Layer (HAL): Standard interfaces that expose 
+device hardware capabilities as libraries
+Examples: Camera, bluetooth module
+3.1 C/C++ libraries: give access to core native Android system 
+components and services.
+3.2. Android runtime: Each app runs in its own process with its own 
+instance of the Android Runtime. 
+
+--- Page 8 ---
+Android Platform Architecture
+4. Java API Framework:
+The entire feature-set of the Android OS is available to you through 
+APIs  written in the Java language. 
+●View class hierarchy to create UI screens
+●Notification manager
+●Activity manager for life cycles and navigation
+
+--- Page 9 ---
+Android Platform Architecture
+5. System and user apps
+●System apps have no special status
+●System apps provide key capabilities to app developers 
+●Example:
+Your app can use a system app to deliver a SMS message. 
+
+--- Page 10 ---
+Android versions
+
+--- Page 11 ---
+Android versions
+
+--- Page 12 ---
+Android versions
+
+--- Page 13 ---
+Challenges of Android development
+•
+Multiple screen sizes and resolutions
+•
+Performance: make your apps responsive and smooth
+•
+Security: keep source code and user data safe
+•
+Compatibility: run well on older platform versions
+
+--- Page 14 ---
+Android application development
+●Android Studio
+●Develop, run, debug, test, and 
+package apps
+●Monitors and performance tools
+●Virtual devices
+●Project views
+●Visual layout editor
+
+--- Page 15 ---
+Android application development
+●Android Software Developer Kit (SDK)
+●Development tools (debugger, monitors, editors)
+●Libraries (maps, wearables)
+●Virtual devices (emulators)
+●Documentation (developers.android.com)
+●Sample code
+
+--- Page 16 ---
+References
+•
+https://google-developer-training.github.io/android-developer-
+fundamentals-course-concepts-v2/
+
+--- Page 17 ---
+Practice Project samples for groups (5 members)
+•
+Describe: Develop an Android application for Products Sale
+•
+Database: Using MySQL/SQLServer (using Restful API) or database on Firebase cloud
+•
+Functions:
+–
+Sign Up/Login screen: manage users
+–
+List of Products screen: show list of products
+–
+Product details screen: show information of a product
+–
+Product Cart screen: show products that user selects to buy
+–
+Billing screen: process payment of user
+–
+Show a notification if Cart has products when opening the application
+–
+Map screen: show Store’s location
+–
+Chat screen: customers can chat with Store
+
+--- Page 18 ---
+Other apps
+•
+Task management
+•
+Expense management
+•
+Story reading app
+•
+Music app
+•
+Video app
+•
+Weather app
+•
+Some games
+•
+Etc.
+
+--- Page 19 ---
+Requirement for project
+•
+Each member at least 3-4 screen (medium)
+•
+Submit source code & Document
+•
+Present the result.
+

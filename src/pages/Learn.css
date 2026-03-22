@@ -1,0 +1,224 @@
+.learn-page {
+  max-width: 900px;
+  padding-bottom: 60px;
+}
+
+.learn-header {
+  text-align: center;
+  margin-bottom: 40px;
+}
+
+.learn-header h1 {
+  font-size: 2rem;
+  margin-bottom: 8px;
+}
+
+.learn-header p {
+  color: var(--text-secondary);
+  max-width: 500px;
+  margin: 0 auto;
+}
+
+/* Chapters List */
+.chapters-list {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+}
+
+.chapter-card {
+  background: var(--bg-card);
+  border: 1px solid var(--border-default);
+  border-radius: var(--radius-md);
+  overflow: hidden;
+  animation: fadeInUp 0.4s ease forwards;
+  opacity: 0;
+  transition: var(--transition-normal);
+}
+
+.chapter-card:hover {
+  border-color: var(--border-hover);
+}
+
+.chapter-card.expanded {
+  border-color: var(--border-accent);
+}
+
+.chapter-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  width: 100%;
+  padding: 18px 20px;
+  background: transparent;
+  color: var(--text-primary);
+  text-align: left;
+}
+
+.chapter-left {
+  display: flex;
+  align-items: center;
+  gap: 14px;
+}
+
+.chapter-icon {
+  font-size: 1.5rem;
+  width: 44px;
+  height: 44px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: var(--bg-elevated);
+  border-radius: var(--radius-sm);
+}
+
+.chapter-info h3 {
+  font-size: 1rem;
+  font-weight: 600;
+  margin-bottom: 2px;
+}
+
+.chapter-subtitle {
+  font-size: 0.8rem;
+  color: var(--text-muted);
+}
+
+.chapter-right {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+}
+
+.chapter-clo {
+  padding: 3px 10px;
+  border-radius: 12px;
+  background: rgba(99, 102, 241, 0.15);
+  color: var(--accent-primary-hover);
+  font-size: 0.75rem;
+  font-weight: 600;
+}
+
+.chapter-arrow {
+  color: var(--text-muted);
+  transition: transform 0.3s ease;
+  font-size: 1.2rem;
+}
+
+.chapter-arrow.open {
+  transform: rotate(180deg);
+}
+
+/* Chapter Content */
+.chapter-content {
+  padding: 0 20px 24px;
+  border-top: 1px solid var(--border-default);
+}
+
+.content-section {
+  margin-top: 20px;
+}
+
+.content-section h4 {
+  font-size: 0.95rem;
+  margin-bottom: 12px;
+  color: var(--text-primary);
+}
+
+.chapter-summary {
+  color: var(--text-secondary);
+  font-size: 0.9rem;
+  line-height: 1.7;
+}
+
+/* Keywords Table */
+.keywords-table {
+  border: 1px solid var(--border-default);
+  border-radius: var(--radius-sm);
+  overflow: hidden;
+}
+
+.kw-header {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 16px;
+  padding: 10px 16px;
+  background: var(--bg-elevated);
+  font-weight: 600;
+  font-size: 0.85rem;
+  color: var(--text-muted);
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
+}
+
+.kw-row {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 16px;
+  padding: 10px 16px;
+  border-top: 1px solid var(--border-default);
+  font-size: 0.9rem;
+}
+
+.kw-en {
+  color: var(--accent-primary-hover);
+  font-weight: 500;
+  font-family: 'JetBrains Mono', monospace;
+  font-size: 0.85rem;
+}
+
+.kw-vi {
+  color: var(--text-secondary);
+}
+
+/* Code Examples */
+.code-example {
+  margin-top: 12px;
+}
+
+.code-example-title {
+  display: block;
+  font-size: 0.85rem;
+  color: var(--text-muted);
+  margin-bottom: 8px;
+  font-weight: 500;
+}
+
+.code-block {
+  background: var(--bg-primary);
+  border: 1px solid var(--border-default);
+  border-radius: var(--radius-sm);
+  padding: 16px;
+  overflow-x: auto;
+  font-family: 'JetBrains Mono', 'Fira Code', monospace;
+  font-size: 0.82rem;
+  line-height: 1.6;
+  color: var(--text-secondary);
+}
+
+@media (max-width: 768px) {
+  .chapter-left {
+    gap: 10px;
+  }
+
+  .chapter-icon {
+    width: 36px;
+    height: 36px;
+    font-size: 1.2rem;
+  }
+
+  .chapter-info h3 {
+    font-size: 0.9rem;
+  }
+
+  .kw-header,
+  .kw-row {
+    font-size: 0.8rem;
+    gap: 8px;
+    padding: 8px 12px;
+  }
+
+  .code-block {
+    font-size: 0.75rem;
+    padding: 12px;
+  }
+}
