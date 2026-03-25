@@ -10,6 +10,7 @@ function Navbar() {
     { path: '/', label: '🏠 Trang chủ', icon: '🏠' },
     { path: '/learn', label: '📚 Học tập', icon: '📚' },
     { path: '/quiz', label: '✏️ Luyện đề', icon: '✏️' },
+    { path: '/cheatsheet', label: '📋 Cheatsheet', icon: '📋' },
   ];
 
   return (
