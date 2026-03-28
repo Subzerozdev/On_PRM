@@ -18,7 +18,7 @@ function Quiz() {
   const timerRef = useRef(null);
 
   // Filter out duplicates for unique questions
-  const uniqueQuestions = quizData.filter(q => !q.isDuplicate);
+  const uniqueQuestions = quizData.filter(q => !q.isDuplicate && q.correct && q.options && q.options.length > 0);
 
   const topics = [...new Set(uniqueQuestions.map(q => q.topic))];
 
@@ -89,24 +89,25 @@ function Quiz() {
   };
 
   const handleConfirm = () => {
+    const correctVal = currentQ?.correct || '';
     if (currentQ?.multipleChoice) {
-      const correctArr = currentQ.correct.split(',');
+      const correctArr = correctVal.split(',');
       const isCorrect = correctArr.length === selectedAnswers.length &&
         correctArr.every(c => selectedAnswers.includes(c));
       if (isCorrect) setScore(s => s + 1);
       setAnswers(prev => [...prev, { 
         questionId: currentQ.id, 
         selected: selectedAnswers.join(','), 
-        correct: currentQ.correct, 
+        correct: correctVal, 
         isCorrect 
       }]);
     } else {
-      const isCorrect = selectedAnswer === currentQ.correct;
+      const isCorrect = selectedAnswer === correctVal;
       if (isCorrect) setScore(s => s + 1);
       setAnswers(prev => [...prev, { 
         questionId: currentQ.id, 
         selected: selectedAnswer, 
-        correct: currentQ.correct, 
+        correct: correctVal, 
         isCorrect 
       }]);
     }
@@ -267,7 +268,7 @@ function Quiz() {
                 </div>
                 <div className="review-options">
                   {q.options.map(opt => {
-                    const isCorrect = q.correct.includes(opt.key);
+                    const isCorrect = (q.correct || '').includes(opt.key);
                     const isSelected = answer?.selected?.includes(opt.key);
                     let className = 'review-option';
                     if (isCorrect) className += ' correct';
@@ -346,7 +347,7 @@ function Quiz() {
             const isSelected = isMulti 
               ? selectedAnswers.includes(opt.key.trim())
               : selectedAnswer === opt.key.trim();
-            const isCorrect = currentQ.correct.includes(opt.key.trim());
+            const isCorrect = (currentQ.correct || '').includes(opt.key.trim());
             
             let className = 'quiz-option';
             if (isSelected) className += ' selected';
@@ -382,7 +383,7 @@ function Quiz() {
             <div className="explanation-header">
               {answers[answers.length - 1]?.isCorrect 
                 ? '✅ Chính xác!' 
-                : `❌ Sai rồi! Đáp án đúng: ${currentQ.correct}`
+                : `❌ Sai rồi! Đáp án đúng: ${currentQ.correct || 'N/A'}`
               }
             </div>
             <div className="explanation-content">
